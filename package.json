@@ -1,22 +1,23 @@
 {
-  "name": "serverauth",
+  "name": "daily-checklist-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Arden488/ServerAuth.git"
+    "url": "git+https://github.com/Arden488/DailyChecklistServer.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Arden488/ServerAuth/issues"
+    "url": "https://github.com/Arden488/DailyChecklistServer/issues"
   },
-  "homepage": "https://github.com/Arden488/ServerAuth#readme",
+  "homepage": "https://github.com/Arden488/DailyChecklistServer#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
