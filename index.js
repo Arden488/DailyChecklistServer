@@ -7,7 +7,6 @@ const router = require('./router');
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://dcdb_user:A1qKlZuMn6G4@ds239071.mlab.com:39071/daily-checklist');
-mongodb://takaragame_user:mLH56uPHid@ds255768.mlab.com:55768/takaragame
 
 app.use(morgan('combined'));
 app.use(bodyParser.json({ type: '*/*' }));
