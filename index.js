@@ -7,7 +7,11 @@ const router = require('./router');
 const mongoose = require('mongoose');
 // const TelegramBot = require('node-telegram-bot-api');
 
-mongoose.connect('mongodb://dcdb_user:A1qKlZuMn6G4@ds239071.mlab.com:39071/daily-checklist');
+const db_addr = process.env.NODE_ENV === 'development' ? 
+  process.env.DB_ADDR_LOCAL : 
+  process.env.DB_ADDR_REMOTE;
+
+mongoose.connect(db_addr);
 
 app.use(morgan('combined'));
 app.use(bodyParser.json({ type: '*/*' }));
