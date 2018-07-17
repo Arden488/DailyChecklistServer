@@ -11,6 +11,7 @@ function tokenForUser(user) {
 }
 
 exports.signup = (req, res, next) => {
+  const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
 
@@ -24,6 +25,7 @@ exports.signup = (req, res, next) => {
     }
 
     const user = new User({
+      name,
       email,
       password
     });
@@ -37,5 +39,9 @@ exports.signup = (req, res, next) => {
 };
 
 exports.signin = (req, res, next) => {
-  res.send({ token: tokenForUser(req.user) });
+  res.send({ 
+    id: req.user._id,
+    name: req.user.name,
+    token: tokenForUser(req.user),
+  });
 };
