@@ -5,6 +5,7 @@ const app = express();
 const cors = require('cors');
 const router = require('./router');
 const mongoose = require('mongoose');
+require('dotenv').config();
 // const TelegramBot = require('node-telegram-bot-api');
 
 const db_addr = process.env.NODE_ENV === 'development' ? 
