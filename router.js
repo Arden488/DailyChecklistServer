@@ -5,7 +5,18 @@ const passportService = require('./services/passport');
 const passport = require('passport');
 
 const requireAuth = passport.authenticate('jwt', { session: false });
-const requireSignin = passport.authenticate('local', { session: false })
+const requireSignin = function (req, res, next) {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err); 
+    }
+    if (!user) {
+      return res.status(401).json(info);
+    }
+    req.user = user;
+    return next();
+  })(req, res, next);
+};
 
 module.exports = (app) => {
   app.post('/reports', requireAuth, Report.createReport);
