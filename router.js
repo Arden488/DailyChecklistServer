@@ -21,7 +21,7 @@ const requireSignin = function (req, res, next) {
 module.exports = (app) => {
   app.post('/reports', requireAuth, Report.createReport);
   app.get('/reports', requireAuth, Report.getReports);
-  app.get('/reports/:year/:month/:date', requireAuth, Report.getReportByDate);
+  app.get('/reports/:year/:month/:date/:time', requireAuth, Report.getReportByDate);
   app.put('/reports/:id', requireAuth, Report.updateReport);
   
   app.delete('/questions/:delete', requireAuth, Question.deleteQuestion);
