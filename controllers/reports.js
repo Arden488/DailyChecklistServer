@@ -1,4 +1,5 @@
 const Report = require('../models/report');
+const moment = require('moment');
 
 exports.getReports = (req, res) => {
   Report.find({}, (err, items) => {
@@ -15,11 +16,12 @@ exports.getReport = (req, res) => {
 }
 
 exports.getReportByDate = (req, res) => {
-  const dateStr = `${req.params.year}-${req.params.month}-${req.params.date}`;
+  const dateStr = `${req.params.year}-${req.params.month}-${req.params.date} ${req.params.time}`;
+  const UTCDateStr = moment(dateStr).utc().format('YYYY-MM-DD');
   Report.find({ date: 
     {
-      '$gte': new Date(`${dateStr}T00:00:00.000Z`), 
-      '$lt': new Date(`${dateStr}T23:59:59.990Z`)
+      '$gte': new Date(`${UTCDateStr}T00:00:00.000Z`),
+      '$lt': new Date(`${UTCDateStr}T23:59:59.990Z`),
     } 
   }, (err, item) => {
     if (err) res.sendStatus(500);
@@ -56,6 +58,9 @@ exports.updateReport = (req, res) => {
 
     if (answer.options.goodStartsOn)
       answerData.options.goodStartsOn = answer.options.goodStartsOn;
+
+    if (answer.options.reverse)
+      answerData.options.reverse = answer.options.reverse;
 
     if (answer.options.values) {
       answerData.options.values = [];
@@ -108,6 +113,9 @@ exports.createReport = (req, res, next) => {
 
     if (answer.options.goodStartsOn)
       answerData.options.goodStartsOn = answer.options.goodStartsOn;
+
+    if (answer.options.reverse)
+      answerData.options.reverse = answer.options.reverse;
 
     if (answer.options.values) {
       answerData.options.values = [];
